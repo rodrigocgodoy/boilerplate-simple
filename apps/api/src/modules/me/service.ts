@@ -17,7 +17,7 @@ export class MeService {
 			email: user.email,
 			emailVerified: user.emailVerified,
 			...(user.image ? { image: user.image } : {}),
-			updatedAt: user.updatedAt,
+			updatedAt: user.updatedAt.toISOString(),
 		};
 	}
 }
