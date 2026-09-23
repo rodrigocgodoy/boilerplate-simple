@@ -1,0 +1,23 @@
+#!/bin/sh
+# Roda antes de cada commit. Se qualquer passo falhar, o commit é barrado.
+# Fica versionado em .githooks/ e vale para todo mundo depois de:
+#   git config core.hooksPath .githooks
+
+# 1. Nunca commitar segredo: barra .env e variações (.env.local, .env.production...),
+#    mas deixa passar o .env.example, que é só um modelo.
+SEGREDOS=$(git diff --cached --name-only | grep -E '(^|/)\.env(\..*)?$' | grep -v '\.env\.example$')
+if [ -n "$SEGREDOS" ]; then
+  echo "✘ Commit barrado: arquivo de segredo no commit:"
+  echo "$SEGREDOS"
+  echo "  Tire do commit com: git restore --staged <arquivo>"
+  exit 1
+fi
+
+# 2. Lint (Biome) e typecheck (TypeScript) têm que passar.
+echo "→ pre-commit: pnpm lint"
+pnpm lint || { echo "✘ Commit barrado: o lint falhou. Corrija (ou rode pnpm lint:fix) e tente de novo."; exit 1; }
+
+echo "→ pre-commit: pnpm typecheck"
+pnpm typecheck || { echo "✘ Commit barrado: erro de tipo. Corrija e tente de novo."; exit 1; }
+
+echo "✔ pre-commit: tudo certo, pode commitar."
