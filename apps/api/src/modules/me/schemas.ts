@@ -6,7 +6,7 @@ export const meResponseSchema = z.object({
   name: z.string(),
   email: z.string(),
   emailVerified: z.boolean(),
-  image: z.string(),
+  image: z.string().optional(),
   updatedAt: z.string(),
 })
 

@@ -25,9 +25,9 @@ export type GetMe200 = {
     */
     emailVerified: boolean;
     /**
-     * @type string
+     * @type string | undefined
     */
-    image: string;
+    image?: string;
     /**
      * @type string
     */
