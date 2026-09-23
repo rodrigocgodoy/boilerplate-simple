@@ -1,48 +1,48 @@
 {
-	"name": "boilerplate",
-	"version": "1.0.0",
-	"private": true,
-	"type": "module",
-	"packageManager": "pnpm@10.6.0",
-	"engines": {
-		"node": ">=20",
-		"pnpm": ">=10"
-	},
-	"prisma": {
-		"schema": "packages/database/prisma/schema.prisma"
-	},
-	"scripts": {
-		"dev": "turbo run dev",
-		"build": "turbo run build",
-		"typecheck": "turbo run typecheck",
-		"lint": "biome check .",
-		"lint:fix": "biome check . --write",
-		"format": "biome format --write .",
-		"db:generate": "pnpm --filter @repo/database generate",
-		"db:migrate": "pnpm --filter @repo/database dev",
-		"db:deploy": "pnpm --filter @repo/database deploy",
-		"db:studio": "pnpm --filter @repo/database studio",
-		"db:reset": "pnpm --filter @repo/database reset",
-		"auth:generate": "pnpm --filter @repo/api auth:generate",
-		"openapi": "pnpm --filter @repo/api openapi",
-		"api-client": "pnpm --filter @repo/api-client build",
-		"setup": "git config core.hooksPath .githooks && pnpm install && pnpm db:generate && pnpm openapi && pnpm api-client"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "^2.5.3",
-		"@types/node": "^22.9.1",
-		"prisma": "^7.8.0",
-		"tsx": "^4.19.2",
-		"turbo": "^2.3.3",
-		"typescript": "^5.6.3"
-	},
-	"pnpm": {
-		"onlyBuiltDependencies": [
-			"@prisma/client",
-			"@prisma/engines",
-			"prisma",
-			"esbuild",
-			"@biomejs/biome"
-		]
-	}
+  "name": "boilerplate",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.6.0",
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=10"
+  },
+  "prisma": {
+    "schema": "packages/database/prisma/schema.prisma"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "lint": "biome check .",
+    "lint:fix": "biome check . --write",
+    "format": "biome format --write .",
+    "db:generate": "pnpm --filter @repo/database generate",
+    "db:migrate": "pnpm --filter @repo/database dev",
+    "db:deploy": "pnpm --filter @repo/database deploy",
+    "db:studio": "pnpm --filter @repo/database studio",
+    "db:reset": "pnpm --filter @repo/database reset",
+    "auth:generate": "pnpm --filter @repo/api auth:generate",
+    "openapi": "pnpm --filter @repo/api openapi",
+    "api-client": "pnpm --filter @repo/api-client build",
+    "setup": "pnpm install && pnpm db:generate && pnpm openapi && pnpm api-client"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.3",
+    "@types/node": "^22.9.1",
+    "prisma": "^7.8.0",
+    "tsx": "^4.19.2",
+    "turbo": "^2.3.3",
+    "typescript": "^5.6.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@prisma/client",
+      "@prisma/engines",
+      "prisma",
+      "esbuild",
+      "@biomejs/biome"
+    ]
+  }
 }
