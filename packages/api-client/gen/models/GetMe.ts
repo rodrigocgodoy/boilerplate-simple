@@ -24,11 +24,14 @@ export type GetMe200 = {
      * @type boolean
     */
     emailVerified: boolean;
-    image: (string | null);
     /**
      * @type string
     */
-    createdAt: string;
+    image: string;
+    /**
+     * @type string
+    */
+    updatedAt: string;
 };
 
 /**

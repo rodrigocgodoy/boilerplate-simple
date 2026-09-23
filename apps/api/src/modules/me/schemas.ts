@@ -6,8 +6,8 @@ export const meResponseSchema = z.object({
   name: z.string(),
   email: z.string(),
   emailVerified: z.boolean(),
-  image: z.string().nullable(),
-  createdAt: z.string(),
+  image: z.string(),
+  updatedAt: z.string(),
 })
 
 /** Resposta de erro (401). */
