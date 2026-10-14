@@ -1,0 +1,33 @@
+name: CI
+
+# Dispara em todo Pull Request e em todo push na main.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+
+    # O prisma generate exige a variável, mas não conecta em banco nenhum:
+    # qualquer valor com cara de URL serve. Segredo de verdade vai em Settings → Secrets.
+    env:
+      DATABASE_URL: postgresql://ci:ci@localhost:5432/ci
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Lê a versão do pnpm do campo "packageManager" do package.json
+      - uses: pnpm/action-setup@v4
+
+      # Lê a versão do Node do .nvmrc, igual à sua máquina
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm db:generate
+      - run: pnpm lint
+      - run: pnpm typecheck
